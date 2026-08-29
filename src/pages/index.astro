@@ -1,0 +1,437 @@
+---
+import Base from '../layouts/Base.astro';
+import SpinBadge from '../components/SpinBadge.astro';
+import BenefitsBanner from '../components/BenefitsBanner.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import { services } from '../data/services';
+import { articles } from '../data/articles';
+import { faqs } from '../data/faqs';
+
+const cardIcons: Record<string, string> = {
+  'it-infrastructure': '/assets/frame17-d5e1fd73.svg',
+  networking: '/assets/dashicons-networking-17b77397.svg',
+  procurement: '/assets/lsicon-equipment-filled-bcd97167.svg',
+  'ai-automation': '/assets/boxicons-robot-filled-553bec13.svg',
+  security: '/assets/boxicons-shield-filled-0a5b5958.svg',
+};
+
+const serviceCards: Record<string, string> = {
+  'it-infrastructure':
+    'Complete office and business technology environments — planned, deployed, and tested before your team walks in on day one.',
+  networking:
+    'Structured cabling, enterprise-grade Wi-Fi, and hardened connectivity that holds up as your business grows, not just on launch day.',
+  procurement:
+    'The right laptops, servers, and equipment — sourced, configured, and delivered to spec, without the back-and-forth of a dozen vendors.',
+  'ai-automation':
+    'Practical AI agents built on the infrastructure we already manage for you — support, sales, and back-office work, automated end to end.',
+  security:
+    'Firewalls, endpoint protection, CCTV, and access control working together as one system, not a patchwork bolted on after the fact.',
+};
+
+const row1 = ['it-infrastructure', 'networking', 'procurement'];
+const row2 = ['ai-automation', 'security'];
+const byName = Object.fromEntries(services.map((s) => [s.slug, s.name]));
+
+const steps = [
+  { n: '01', title: 'Assess', desc: 'We start by understanding how your business actually operates, not just what’s on a spec sheet.' },
+  { n: '02', title: 'Design', desc: 'A plan scoped to your budget, your building, and your timeline, not a generic package' },
+  { n: '03', title: 'Procure', desc: 'We source and vet every piece of equipment, so nothing shows up that doesn’t belong' },
+  { n: '04', title: 'Deploy', desc: 'Installed and tested by people who’ve done this before, with minimal disruption to your team' },
+  { n: '05', title: 'Support', desc: 'We stay reachable after go-live, because a system is only as good as the support behind it.' },
+];
+
+const industries = [
+  {
+    key: 'warehousing',
+    icon: '/assets/ph-warehouse-fill-3c433254.svg',
+    title: 'Warehousing & Logistics',
+    desc: 'Rugged networking and systems built for the floor, not just the office.',
+    image: '/assets/frame39-83de9a5c.png',
+  },
+  {
+    key: 'corporate',
+    icon: '/assets/mdi-office-chair-fc3138b6.svg',
+    title: 'Corporate Offices',
+    desc: 'New office, new floor, new HQ - infrastructure ready before day one.',
+    image: '/assets/thumbnail-e04932cb.png',
+  },
+];
+---
+
+<Base title="Cybernium — Business technology, delivered">
+  <!-- Hero -->
+  <section class="hero-gradient section-px relative flex flex-col items-center justify-end overflow-clip" data-node="1:1068">
+    <!-- Composed technician render from Figma (node 1:1081) -->
+    <img
+      src="/assets/hero-technician-8a988e73.png"
+      alt=""
+      class="pointer-events-none absolute inset-0 hidden size-full object-cover object-bottom xl:block"
+      aria-hidden="true"
+    />
+    <div class="container-site relative flex flex-col justify-between pt-32 max-xl:gap-10 xl:h-[901px] xl:flex-row xl:items-center xl:pt-0">
+      <!-- Headline -->
+      <div class="flex h-full flex-col items-start xl:w-[399px] xl:shrink-0 xl:pt-[200px]">
+        <div class="flex flex-col items-start gap-8 xl:w-[374px]">
+          <p class="eyebrow-solid">business technology, delivered</p>
+          <h1 class="h1 flex flex-col text-deep">
+            <span class="opacity-70">Technology</span>
+            <span class="opacity-70">Infrastructure</span>
+            <span>that keeps</span>
+            <span>your business</span>
+            <span>running</span>
+          </h1>
+        </div>
+      </div>
+
+      <!-- Technician image (stacked variant for smaller screens) -->
+      <div class="relative h-[420px] w-full max-xl:order-last xl:hidden">
+        <img
+          src="/assets/hero-technician-8a988e73.png"
+          alt="Technician doing a checkup in a server room"
+          class="pointer-events-none absolute inset-0 size-full object-cover object-bottom"
+        />
+      </div>
+
+      <!-- Supporting copy -->
+      <div class="flex h-full flex-col items-start gap-10 xl:w-[300px] xl:shrink-0 xl:justify-end xl:gap-[66px] xl:pb-10">
+        <SpinBadge variant="deep" class="max-xl:hidden" />
+        <p class="body-lg text-navy-100">
+          We specify, source, deploy, and support the systems your business runs on as one accountable partner, not a
+          string of vendors passing you between them.
+        </p>
+        <a href="/quote" class="btn-primary w-[142px]">Get a quote</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section-px flex flex-col items-center overflow-clip bg-white" data-node="1:1121">
+    <div class="container-site flex flex-col justify-center gap-[38px] py-20 xl:h-[1104px] xl:py-0">
+      <div class="flex flex-col gap-6">
+        <p class="eyebrow-deep">what we deliver</p>
+        <div class="flex flex-col gap-8 xl:gap-12">
+          <h2 class="h1 flex flex-col text-deep">
+            <span class="opacity-60">Everything your business</span>
+            <span class="flex flex-wrap gap-x-[10px]">
+              <span class="opacity-60">runs on,</span>
+              <span>from one partner</span>
+            </span>
+          </h2>
+          <p class="body-lg max-w-[540px] text-navy-100">
+            We plan it, source it, install it, and keep it running — so you deal with one accountable team instead of
+            five vendors pointing fingers at each other.
+          </p>
+        </div>
+      </div>
+      <div class="flex flex-col gap-2">
+        <div class="grid grid-cols-1 gap-2 md:grid-cols-3">
+          {
+            row1.map((slug) => (
+              <a
+                href={`/services/${slug}`}
+                class="flex min-h-[306px] flex-col justify-center gap-10 rounded-[24px] bg-offwhite px-6 py-8 transition-colors hover:bg-line/60"
+              >
+                <img src={cardIcons[slug]} alt="" class="size-8 object-contain object-left" />
+                <span class="flex flex-col gap-6">
+                  <span class="h4 text-navy">{byName[slug]}</span>
+                  <span class="body-df text-ink-2">{serviceCards[slug]}</span>
+                </span>
+              </a>
+            ))
+          }
+        </div>
+        <div class="grid grid-cols-1 gap-2 md:grid-cols-3">
+          {
+            row2.map((slug) => (
+              <a
+                href={`/services/${slug}`}
+                class="flex min-h-[306px] flex-col justify-center gap-10 rounded-[24px] bg-offwhite px-6 py-8 transition-colors hover:bg-line/60"
+              >
+                <img src={cardIcons[slug]} alt="" class="size-8 object-contain object-left" />
+                <span class="flex flex-col gap-6">
+                  <span class="h4 text-navy">{byName[slug]}</span>
+                  <span class="body-df text-ink-2">{serviceCards[slug]}</span>
+                </span>
+              </a>
+            ))
+          }
+          <div class="flex items-end px-6 py-2.5">
+            <a href="/quote" class="btn-outline">Get a quote</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <BenefitsBanner />
+
+  <!-- Featured capability -->
+  <section class="section-px flex flex-col items-center justify-center overflow-clip bg-white" data-node="1:1192">
+    <div class="container-site relative flex items-center justify-center py-20 xl:h-[1024px] xl:py-0">
+      <div class="flex w-full flex-col items-start justify-between gap-12 xl:flex-row">
+        <div class="flex flex-col gap-10 xl:max-w-[660px] xl:gap-14">
+          <div class="flex flex-col gap-6">
+            <p class="eyebrow-deep">featured capability</p>
+            <div class="flex flex-col gap-8">
+              <h2 class="h1 flex flex-col text-deep">
+                <span class="opacity-60">Where we’re taking your</span>
+                <span class="flex flex-wrap gap-x-[10px]">
+                  <span>business</span>
+                  <span>next</span>
+                </span>
+              </h2>
+              <p class="body-lg text-navy-100">
+                Automation built on the infrastructure we already manage for you. Our AI agents handle customer
+                support, qualify sales leads, process documents, and run back-office workflows — with a human always in
+                the loop for what matters. It's not AI for its own sake. It's measurable operational value, built on
+                systems you already trust us with.
+              </p>
+            </div>
+          </div>
+          <a href="/services/ai-automation" class="btn-outline self-start">Explore AI &amp; Automation</a>
+        </div>
+        <div class="relative max-xl:self-center">
+          <div class="relative h-[500px] w-full max-w-[544px] overflow-hidden rounded-[24px] sm:w-[544px] xl:h-[673px]">
+            <img
+              src="/assets/featured-automation-4846859a.png"
+              alt="AI automation touchpoints"
+              class="absolute inset-0 size-full rounded-[24px] object-cover"
+            />
+          </div>
+          <SpinBadge variant="brand" bordered class="absolute top-[40%] -left-[69px] max-md:hidden" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How we work -->
+  <section class="section-px flex flex-col items-center justify-center overflow-clip bg-navy" data-node="1:1240">
+    <div class="container-site flex flex-col items-center gap-[72px] py-20 xl:py-[120px]">
+      <div class="flex flex-col items-center gap-6">
+        <p class="eyebrow-light">HOW WE WORK</p>
+        <div class="flex flex-col items-center gap-8 text-center">
+          <h2 class="h1 flex max-w-[540px] flex-col items-center text-offwhite">
+            <span class="opacity-60">From first call to</span>
+            <span>fully deployed</span>
+          </h2>
+          <p class="body-lg max-w-[540px] text-navy-50">Five steps, one team, no surprises along the way.</p>
+        </div>
+      </div>
+      <div class="flex w-full flex-col">
+        {
+          steps.map((step, i) => (
+            <div class="flex w-full items-stretch">
+              {i % 2 === 1 && (
+                <div
+                  class="w-[478px] shrink-0 border border-[#213a55] max-lg:hidden"
+                  style="background-image: linear-gradient(-37deg, #15273b 33%, rgba(21,39,59,0) 62%);"
+                />
+              )}
+              <div
+                class="flex flex-1 flex-col border border-[#213a55] p-6 sm:p-10"
+                style={
+                  i % 2 === 0
+                    ? 'background-image: linear-gradient(-41deg, #15273b 22%, rgba(21,39,59,0) 90%);'
+                    : 'background-image: linear-gradient(45deg, #15273b 3%, rgba(21,39,59,0) 83%);'
+                }
+              >
+                <div class="flex max-w-[720px] flex-col gap-10">
+                  <p class="h1 text-brand">{step.n}</p>
+                  <div class="flex flex-col gap-3.5">
+                    <h3 class="h3 text-white">{step.title}</h3>
+                    <p class="body-lg text-navy-50">{step.desc}</p>
+                  </div>
+                </div>
+              </div>
+              {i % 2 === 0 && (
+                <div
+                  class="w-[478px] shrink-0 border border-[#213a55] max-lg:hidden"
+                  style="background-image: linear-gradient(28deg, rgba(21,39,59,0) 20%, #15273b 83%);"
+                />
+              )}
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Industries carousel -->
+  <section class="section-px flex flex-col items-center bg-white" data-node="1:1291">
+    <div class="container-site flex flex-col justify-center gap-14 py-20 xl:h-[1024px] xl:py-0">
+      <div class="flex flex-col justify-between gap-8 xl:flex-row xl:items-end">
+        <div class="flex flex-col gap-6">
+          <p class="eyebrow-deep">who we work with</p>
+          <div class="flex max-w-[602px] flex-col gap-8">
+            <h2 class="h1 flex flex-col text-deep">
+              <span class="opacity-60">Built for businesses that</span>
+              <span class="flex flex-wrap gap-x-[10px]">
+                <span>can’t afford</span>
+                <span>downtime</span>
+              </span>
+            </h2>
+            <p class="body-lg text-navy-100">
+              From single offices to multi-branch operations, we design around how your business actually runs.
+            </p>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <button
+            type="button"
+            data-industry-prev
+            aria-label="Previous industry"
+            class="flex size-11 cursor-pointer items-center justify-center rounded-full border border-navy text-navy transition-colors hover:bg-navy hover:text-white"
+          >
+            <svg viewBox="0 0 24 24" fill="none" class="size-6"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </button>
+          <button
+            type="button"
+            data-industry-next
+            aria-label="Next industry"
+            class="flex size-11 cursor-pointer items-center justify-center rounded-full border border-navy text-navy transition-colors hover:bg-navy hover:text-white"
+          >
+            <svg viewBox="0 0 24 24" fill="none" class="size-6"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </button>
+        </div>
+      </div>
+
+      <div id="industries" class="relative">
+        {
+          industries.map((slide, i) => (
+            <div
+              data-industry-slide
+              class:list={['flex flex-col gap-2 lg:h-[418px] lg:flex-row', i !== 0 && 'hidden']}
+            >
+              <div class="relative min-h-[260px] flex-1 overflow-hidden rounded-[24px] bg-navy">
+                <img src={slide.image} alt={slide.title} class="absolute inset-0 size-full rounded-[24px] object-cover" />
+              </div>
+              <div class="flex flex-col justify-between gap-10 rounded-[24px] bg-offwhite p-6 sm:p-10 lg:w-[611px] lg:shrink-0">
+                <div class="flex flex-col gap-6">
+                  <img src={slide.icon} alt="" class="size-10 object-contain object-left" />
+                  <div class="flex flex-col gap-2">
+                    <h3 class="h3 text-navy">{slide.title}</h3>
+                    <p class="body-lg text-navy-100">{slide.desc}</p>
+                  </div>
+                </div>
+                <div class="flex flex-col gap-4">
+                  <div class="h-px w-full bg-line" />
+                  <div class="flex flex-col gap-2.5">
+                    <p class="body-df font-bold text-navy">Adebayo Akinfemi</p>
+                    <p class="body-df text-navy-100">
+                      “Our offices were completely set up to our needs, all thanks to the team at Cybernium”
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog -->
+  <section class="section-px flex flex-col items-center justify-center bg-navy" data-node="1:1294">
+    <div class="container-site flex flex-col justify-center gap-12 py-20 xl:h-[1024px] xl:py-0">
+      <div class="flex max-w-[686px] flex-col gap-6">
+        <p class="eyebrow-light">from the blog</p>
+        <div class="flex flex-col gap-8">
+          <h2 class="h1 flex flex-wrap gap-x-2 text-offwhite">
+            <span class="opacity-60">Not sales copies,</span>
+            <span>field notes</span>
+          </h2>
+          <p class="body-lg text-navy-50">
+            Practical write-ups on infrastructure, security, procurement, and where AI actually fits — for whoever ends
+            up planning this stuff.
+          </p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
+        {
+          articles.map((a) => (
+            <ArticleCard
+              title={a.title}
+              subtitle={a.subtitle}
+              href={`/blog/${a.slug}`}
+              image="/assets/blog-thumb-home-c693db2d.png"
+              variant="dark"
+            />
+          ))
+        }
+      </div>
+      <a href="/blog" class="btn-outline-white self-start">
+        View all articles
+        <img src="/assets/arrow-right-white-ace32ec2.svg" alt="" class="size-[18px]" />
+      </a>
+    </div>
+  </section>
+
+  <!-- FAQs -->
+  <section class="section-px flex flex-col items-center bg-white" data-node="1:1316">
+    <div class="container-site flex flex-col items-center gap-[88px] py-20 xl:py-[100px]">
+      <div class="flex max-w-[678px] flex-col items-center gap-6">
+        <p class="eyebrow-deep">QUESTIONS</p>
+        <div class="flex flex-col items-center gap-8">
+          <h2 class="h1 flex flex-wrap items-center justify-center gap-x-[10px] text-center text-deep">
+            <span class="opacity-60">Before you</span>
+            <span>request a quote</span>
+          </h2>
+          <p class="body-lg text-center text-navy-100">
+            Here are somethings you might want to know while you’re planning to work with us
+          </p>
+        </div>
+      </div>
+      <div class="flex w-full max-w-[770px] flex-col gap-6">
+        {
+          faqs.map((faq, i) => (
+            <div class="flex flex-col gap-4 border-b border-line pb-4" data-faq>
+              <button
+                type="button"
+                class="flex w-full cursor-pointer items-center justify-between gap-4 text-left"
+                aria-expanded={i === 0 ? 'true' : 'false'}
+                data-faq-toggle
+              >
+                <span class="h3 flex-1 pr-4 text-deep sm:pr-[72px]">{faq.question}</span>
+                <span class="flex size-11 shrink-0 items-center justify-center rounded-full bg-navy transition-colors hover:bg-navy-400">
+                  <img
+                    src="/assets/stash-plus-light-249235b4.svg"
+                    alt=""
+                    class:list={['size-6 transition-transform duration-200', i === 0 && 'rotate-45']}
+                    data-faq-icon
+                  />
+                </span>
+              </button>
+              <div class:list={['pr-4 sm:pr-[88px]', i !== 0 && 'hidden']} data-faq-panel>
+                <p class="body-df text-muted">{faq.answer}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  // FAQ accordion
+  document.querySelectorAll('[data-faq]').forEach((item) => {
+    const toggle = item.querySelector('[data-faq-toggle]');
+    const panel = item.querySelector('[data-faq-panel]');
+    const icon = item.querySelector('[data-faq-icon]');
+    toggle?.addEventListener('click', () => {
+      const open = panel?.classList.toggle('hidden') === false;
+      toggle.setAttribute('aria-expanded', String(open));
+      icon?.classList.toggle('rotate-45', open);
+    });
+  });
+
+  // Industries carousel
+  const slides = Array.from(document.querySelectorAll('[data-industry-slide]'));
+  let current = 0;
+  function showSlide(index: number) {
+    current = (index + slides.length) % slides.length;
+    slides.forEach((s, i) => s.classList.toggle('hidden', i !== current));
+  }
+  document.querySelector('[data-industry-prev]')?.addEventListener('click', () => showSlide(current - 1));
+  document.querySelector('[data-industry-next]')?.addEventListener('click', () => showSlide(current + 1));
+</script>

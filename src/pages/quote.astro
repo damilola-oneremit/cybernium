@@ -1,0 +1,277 @@
+---
+import Base from '../layouts/Base.astro';
+import { services } from '../data/services';
+
+const selectOptions = {
+  service: services.map((s) => s.name),
+  size: ['Single office', 'Multiple floors', 'Multi-branch', 'Warehouse / industrial', 'Not sure yet'],
+  timeline: ['As soon as possible', 'Within 1 month', '1–3 months', '3+ months', 'Just exploring'],
+};
+
+const nextSteps = [
+  'We review your request against what you’ve told us.',
+  'We follow up within one business day to confirm scope',
+  'You receive a clear, scoped quotation - no obligation.',
+];
+---
+
+<Base title="Get a quote — Cybernium" description="Tell us what you need and we'll come back with a clear, scoped quotation within one business day.">
+  <!-- Hero -->
+  <section class="hero-gradient section-px relative flex min-h-[480px] items-end justify-center overflow-clip pt-40 xl:h-[555px]" data-node="1:1539">
+    <img
+      src="/assets/frame93-3c96e5a3.svg"
+      alt=""
+      class="pointer-events-none absolute top-0 right-[-197px] h-[555px] w-[783px] max-w-none max-lg:opacity-50"
+      aria-hidden="true"
+    />
+    <div class="container-site relative flex h-full items-end justify-center">
+      <div class="flex flex-col items-center gap-6 pb-14 xl:pb-20">
+        <div class="flex flex-col items-center gap-6">
+          <p class="eyebrow-solid">request a quote</p>
+          <h1 class="h1 text-center text-deep">Tell us what you need</h1>
+        </div>
+        <p class="body-lg max-w-[523px] text-center text-navy-100">
+          Fill out a few details and we'll come back with a clear, scoped quotation — not a sales pitch — within one
+          business day.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Form -->
+  <section class="section-px flex flex-col items-center bg-white" data-node="1:1549">
+    <div class="container-site flex flex-col items-center gap-12 pt-10 pb-20">
+      <form id="quote-form" class="flex w-full max-w-[957px] flex-col gap-6" novalidate>
+        <div class="flex flex-col gap-6 md:flex-row">
+          <label class="rrq-field">
+            <span class="rrq-label">Full name**</span>
+            <input type="text" name="name" required placeholder="Your full name" class="rrq-input" />
+          </label>
+          <label class="rrq-field">
+            <span class="rrq-label">Work email**</span>
+            <input type="email" name="email" required placeholder="you@company.com" class="rrq-input" />
+          </label>
+        </div>
+        <div class="flex flex-col gap-6 md:flex-row">
+          <label class="rrq-field">
+            <span class="rrq-label">Phone number**</span>
+            <input type="tel" name="phone" required placeholder="Enter phone" class="rrq-input" />
+          </label>
+          <label class="rrq-field">
+            <span class="rrq-label">Company name**</span>
+            <input type="text" name="company" required placeholder="Acme Inc" class="rrq-input" />
+          </label>
+        </div>
+        <div class="flex flex-col gap-6 md:flex-row">
+          <label class="rrq-field">
+            <span class="rrq-label">Project location**</span>
+            <input type="text" name="location" required placeholder="Lagos, Nigeria" class="rrq-input" />
+          </label>
+          <label class="rrq-field relative">
+            <span class="rrq-label">SERVICE**</span>
+            <select name="service" required class="rrq-input appearance-none pr-8">
+              <option value="" selected disabled>Select here..</option>
+              {selectOptions.service.map((o) => <option value={o}>{o}</option>)}
+            </select>
+            <img src="/assets/fluent-chevron-down20-regular-391f0d8e.svg" alt="" class="pointer-events-none absolute top-1/2 right-6 size-6 -translate-y-1/2" />
+          </label>
+        </div>
+        <div class="flex flex-col gap-6 md:flex-row">
+          <label class="rrq-field relative">
+            <span class="rrq-label">PROJECT SIZE**</span>
+            <select name="size" required class="rrq-input appearance-none pr-8">
+              <option value="" selected disabled>Select here..</option>
+              {selectOptions.size.map((o) => <option value={o}>{o}</option>)}
+            </select>
+            <img src="/assets/fluent-chevron-down20-regular-391f0d8e.svg" alt="" class="pointer-events-none absolute top-1/2 right-6 size-6 -translate-y-1/2" />
+          </label>
+          <label class="rrq-field relative">
+            <span class="rrq-label">ESTIMATED TIMELINE**</span>
+            <select name="timeline" required class="rrq-input appearance-none pr-8">
+              <option value="" selected disabled>Select here..</option>
+              {selectOptions.timeline.map((o) => <option value={o}>{o}</option>)}
+            </select>
+            <img src="/assets/fluent-chevron-down20-regular-391f0d8e.svg" alt="" class="pointer-events-none absolute top-1/2 right-6 size-6 -translate-y-1/2" />
+          </label>
+        </div>
+        <label class="rrq-field h-[162px] justify-start">
+          <span class="rrq-label">Project details**</span>
+          <textarea
+            name="details"
+            required
+            placeholder="Tell us what you’re looking to set up, upgrade, or solve..."
+            class="rrq-input h-full resize-none"></textarea>
+        </label>
+
+        <div class="flex flex-col gap-2">
+          <p class="body-lg text-navy">Attachments</p>
+          <label
+            class="flex h-[162px] w-full cursor-pointer flex-col items-center justify-center gap-4 rounded-[16px] border border-input-line bg-offwhite px-6 py-4 transition-colors hover:border-line"
+          >
+            <input type="file" name="attachments" accept=".jpg,.jpeg,.png,.pdf" multiple class="sr-only" />
+            <span class="flex items-center gap-1.5 rounded-[8px] border border-input-line bg-white px-2 py-1 drop-shadow-[0px_4px_2px_rgba(69,94,123,0.12)]">
+              <img src="/assets/mynaui-upload-e225e959.svg" alt="" class="size-[18px]" />
+              <span class="body-df text-navy">Select file(s)</span>
+            </span>
+            <span class="eyebrow-text text-placeholder" data-file-note>
+              A spec sheet, floor plan or existing rfq. <span class="text-muted">jpg, png or pdf</span>
+            </span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn-primary self-start">Request a quote</button>
+      </form>
+
+      <div class="flex w-full max-w-[957px] flex-col gap-6">
+        <div class="flex flex-col gap-14 rounded-[24px] border border-line bg-offwhite p-6 sm:p-8">
+          <h2 class="h3 text-navy">What happens next</h2>
+          <ol class="flex flex-col gap-12">
+            {
+              nextSteps.map((step, i) => (
+                <li class="flex items-start gap-4">
+                  <span class="body-lg flex size-7 shrink-0 items-center justify-center rounded-[24px] bg-line text-center text-navy">
+                    {i + 1}
+                  </span>
+                  <span class="body-lg flex-1 text-navy">{step}</span>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+        <div class="flex flex-col gap-14 rounded-[24px] border border-line bg-offwhite p-6 sm:p-8">
+          <h2 class="h3 text-navy">Prefer to talk first?</h2>
+          <div class="flex flex-col gap-12">
+            <a href="mailto:support@cybernium.co" class="flex items-center gap-2.5 hover:opacity-80">
+              <span class="flex h-[34px] w-[33px] items-center justify-center rounded-[24px] bg-brand">
+                <img src="/assets/mynaui-mail-ed133166.svg" alt="" class="size-[17px]" />
+              </span>
+              <span class="body-lg text-navy-400">support@cybernium.co</span>
+            </a>
+            <a href="tel:+2348000000000" class="flex items-center gap-2.5 hover:opacity-80">
+              <span class="flex h-[34px] w-[33px] items-center justify-center rounded-[24px] bg-brand">
+                <img src="/assets/hugeicons-call-eefe3ede.svg" alt="" class="size-[17px]" />
+              </span>
+              <span class="body-lg text-navy-400">+234 800 000 0000</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feedback toasts (Figma nodes 1:2153 / 1:2162) -->
+  <div class="pointer-events-none fixed top-[83px] right-4 z-[60] flex w-[min(425px,calc(100vw-32px))] flex-col gap-3 sm:right-[45px]">
+    <div
+      id="toast-success"
+      hidden
+      class="pointer-events-auto flex items-start gap-6 rounded-[24px] px-[21px] py-5 shadow-lg shadow-navy/10"
+      style="background-image: linear-gradient(161deg, #ebfff3 1%, #ffffff 48%);"
+      role="status"
+    >
+      <div class="flex flex-1 items-start gap-4">
+        <span class="flex items-center rounded-[16px] border border-[#b1efc9] bg-[#ddfeea] p-[9px]">
+          <img src="/assets/toast-check-a10add00.svg" alt="" class="size-8" />
+        </span>
+        <p class="body-df flex-1 pt-1 text-black">Your request has been sent successfully.</p>
+      </div>
+      <button type="button" data-toast-close aria-label="Dismiss" class="cursor-pointer">
+        <img src="/assets/toast-close-f4a4ffe1.svg" alt="" class="size-6" />
+      </button>
+    </div>
+
+    <div
+      id="toast-info"
+      hidden
+      class="pointer-events-auto flex flex-col items-end gap-6 rounded-[24px] px-[21px] py-5 shadow-lg shadow-navy/10"
+      style="background-image: linear-gradient(147deg, #dde0fe 1%, #ffffff 48%);"
+      role="status"
+    >
+      <div class="flex w-full items-start justify-between gap-4">
+        <div class="flex flex-1 items-start gap-4">
+          <span class="flex items-center rounded-[16px] border border-[#c6cbf4] bg-[#dde5fe] p-[9px]">
+            <img src="/assets/toast-info-9fba6832.svg" alt="" class="size-8" />
+          </span>
+          <p class="body-df flex-1 pt-1 text-black">
+            A request has already been sent with this email address, is this a different request?
+          </p>
+        </div>
+        <button type="button" data-toast-close aria-label="Dismiss" class="cursor-pointer">
+          <img src="/assets/toast-close-f4a4ffe1.svg" alt="" class="size-6" />
+        </button>
+      </div>
+      <button type="button" id="send-new-request" class="body-df cursor-pointer rounded-[8px] border border-line bg-white px-4 py-2 text-black hover:bg-offwhite">
+        Send new request
+      </button>
+    </div>
+  </div>
+</Base>
+
+<script>
+  const form = document.getElementById('quote-form') as HTMLFormElement | null;
+  const toastSuccess = document.getElementById('toast-success');
+  const toastInfo = document.getElementById('toast-info');
+  const fileInput = form?.querySelector<HTMLInputElement>('input[type="file"]');
+  const fileNote = document.querySelector('[data-file-note]');
+
+  fileInput?.addEventListener('change', () => {
+    if (fileNote && fileInput.files?.length) {
+      fileNote.textContent = Array.from(fileInput.files)
+        .map((f) => f.name)
+        .join(', ');
+    }
+  });
+
+  document.querySelectorAll('[data-toast-close]').forEach((btn) =>
+    btn.addEventListener('click', () => {
+      (btn.closest('[id^="toast-"]') as HTMLElement | null)?.setAttribute('hidden', '');
+    })
+  );
+
+  function showToast(el: HTMLElement | null) {
+    if (!el) return;
+    el.removeAttribute('hidden');
+    if (el.id === 'toast-success') {
+      window.setTimeout(() => el.setAttribute('hidden', ''), 6000);
+    }
+  }
+
+  // No backend exists for this static site: submissions are remembered per
+  // email in localStorage so the design's duplicate-request info state works.
+  const SENT_KEY = 'cybernium-quote-emails';
+  const sentEmails = (): string[] => {
+    try {
+      return JSON.parse(localStorage.getItem(SENT_KEY) ?? '[]');
+    } catch {
+      return [];
+    }
+  };
+
+  let overrideDuplicate = false;
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!form.reportValidity()) return;
+
+    const email = (new FormData(form).get('email') as string | null)?.trim().toLowerCase() ?? '';
+    const alreadySent = sentEmails().includes(email);
+
+    if (alreadySent && !overrideDuplicate) {
+      toastSuccess?.setAttribute('hidden', '');
+      showToast(toastInfo);
+      return;
+    }
+
+    localStorage.setItem(SENT_KEY, JSON.stringify([...new Set([...sentEmails(), email])]));
+    overrideDuplicate = false;
+    toastInfo?.setAttribute('hidden', '');
+    showToast(toastSuccess);
+    form.reset();
+    if (fileNote) fileNote.innerHTML = 'A spec sheet, floor plan or existing rfq. <span class="text-muted">jpg, png or pdf</span>';
+  });
+
+  document.getElementById('send-new-request')?.addEventListener('click', () => {
+    overrideDuplicate = true;
+    toastInfo?.setAttribute('hidden', '');
+    form?.requestSubmit();
+  });
+</script>

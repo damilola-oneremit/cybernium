@@ -1,0 +1,23 @@
+---
+// Blue scrolling benefits strip (Figma node 1:1158 / 1:1694).
+const items = ['ONE PARTNER', 'START TO FINISH', 'VENDOR-NEUTRAL SOURCING', 'SUPPORT'];
+// Two identical copies make the marquee loop seamless (-50% translate).
+const copies = [items, items];
+---
+
+<section class="w-full overflow-clip bg-brand" aria-label="Why Cybernium">
+  <div class="animate-marquee flex w-max items-center py-6">
+    {
+      copies.map((copy) => (
+        <div class="flex items-center gap-[100px] pr-[100px]">
+          {copy.map((label) => (
+            <div class="flex items-center gap-[100px]">
+              <p class="h3 whitespace-nowrap text-white">{label}</p>
+              <img src="/assets/vector-4b05fed4.svg" alt="" class="h-[21.5px] w-11" />
+            </div>
+          ))}
+        </div>
+      ))
+    }
+  </div>
+</section>

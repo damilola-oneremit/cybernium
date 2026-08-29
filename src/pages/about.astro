@@ -1,0 +1,156 @@
+---
+import Base from '../layouts/Base.astro';
+import SpinBadge from '../components/SpinBadge.astro';
+
+const beliefs = [
+  { n: '01', title: 'Capable, not flashy', desc: "We'd rather the work speak for itself than lean on buzzwords to sell it." },
+  { n: '02', title: 'Direct, not jargon-heavy', desc: "You should understand exactly what you're paying for, whether or not you know what a VLAN is." },
+  { n: '03', title: 'Dependable, not cold', desc: "Enterprise-grade doesn't have to mean impersonal. We answer the phone." },
+  { n: '04', title: 'Modern, not trend-chasing', desc: "We adopt new technology when it's genuinely useful to you, not because it's trending." },
+  { n: '05', title: 'Partner, not vendor', desc: "A vendor disappears after the invoice. We're still here for the next request." },
+];
+
+const heroStrip = [
+  '/assets/frame25-7ba97950.jpg',
+  '/assets/cta-section-d75a4b05.jpg',
+  '/assets/frame27-b5c7a374.jpg',
+  '/assets/frame25-7ba97950.jpg',
+];
+
+const whoWeAreCopy = [
+  'Every growing business eventually hits the same wall: a new office needs wiring, a warehouse needs a network, a hotel needs updated security systems — and suddenly there are four contractors, two vendors, and nobody accountable for how it all fits together.',
+  'Cybernium exists to close that gap. We specify, source, deploy, and support business technology as one team, so you deal with a single relationship instead of a coordination problem.',
+];
+---
+
+<Base title="About us — Cybernium">
+  <!-- Hero -->
+  <section
+    class="section-px flex flex-col items-center justify-between overflow-clip"
+    style="background-image: linear-gradient(180deg, #1b94ca 0.25%, #ffffff 58%);"
+    data-node="1:1418"
+  >
+    <div class="container-site flex flex-col items-start justify-between gap-10 pt-40 xl:flex-row xl:items-end">
+      <div class="flex flex-col gap-8 pb-10 xl:w-[522px] xl:pb-[120px]">
+        <p class="eyebrow-solid self-start">about us</p>
+        <h1 class="h1 flex flex-col text-deep">
+          <span class="opacity-70">We got tired of</span>
+          <span class="opacity-70">watching businesses</span>
+          <span>get passed between</span>
+          <span>vendors</span>
+        </h1>
+        <p class="body-lg text-navy-100">
+          So we built a single, accountable team to own the whole thing instead — from the first assessment to the
+          support call two years later.
+        </p>
+      </div>
+      <div class="relative h-[400px] w-full xl:h-[555px] xl:w-[586px] xl:shrink-0">
+        <img
+          src="/assets/frame93-fac5e5cb.svg"
+          alt=""
+          class="pointer-events-none absolute inset-y-0 left-0 h-full w-auto max-w-none max-xl:opacity-60"
+          aria-hidden="true"
+        />
+      </div>
+    </div>
+    <div class="flex w-full max-w-[1596px] gap-4 self-center overflow-hidden max-md:h-[280px] md:h-[454px]">
+      {
+        heroStrip.map((src, i) => (
+          <div class:list={['relative h-full w-[387px] shrink-0 overflow-hidden rounded-[16px] bg-white', i > 1 && 'max-md:hidden']}>
+            <img src={src} alt="" class="absolute inset-0 size-full object-cover" />
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Why we exist -->
+  <section class="section-px flex flex-col items-center bg-white" data-node="1:1436">
+    <div class="container-site flex flex-col justify-center py-20 xl:h-[686px] xl:py-0">
+      <div class="flex flex-col gap-6">
+        <p class="eyebrow-deep self-start">why we exist</p>
+        <div class="flex flex-col justify-between gap-10 xl:flex-row xl:items-start">
+          <div class="flex flex-col gap-8 xl:w-[611px]">
+            <h2 class="h1 flex flex-col text-deep">
+              <span class="opacity-60">The technology industry</span>
+              <span class="flex flex-wrap gap-x-[10px]">
+                <span class="opacity-60">has a</span>
+                <span>handoff problem</span>
+              </span>
+            </h2>
+            <a href="/quote" class="btn-primary w-[142px]">Get a quote</a>
+          </div>
+          <div class="body-lg flex flex-col gap-6 text-navy-100 xl:w-[540px]">
+            {whoWeAreCopy.map((p) => <p>{p}</p>)}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What we believe -->
+  <section class="section-px flex flex-col items-center justify-center overflow-clip bg-navy" data-node="1:1450">
+    <div class="container-site flex flex-col justify-center gap-[38px] py-20 xl:h-[873px] xl:py-0">
+      <div class="flex flex-col gap-6">
+        <p class="eyebrow-light self-start">what we believe</p>
+        <h2 class="h1 flex max-w-[540px] flex-col text-offwhite">
+          <span class="opacity-60">The principles behind</span>
+          <span>how we work</span>
+        </h2>
+      </div>
+      <div class="flex flex-col gap-4">
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+          {
+            beliefs.slice(0, 3).map((b) => (
+              <div class="flex min-h-[234px] flex-col justify-center gap-8 rounded-[24px] bg-offwhite/4 px-6 py-8">
+                <p class="h3 text-offwhite">{b.n}</p>
+                <div class="flex flex-col gap-6">
+                  <h3 class="h4 text-offwhite">{b.title}</h3>
+                  <p class="body-df text-muted">{b.desc}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+          {
+            beliefs.slice(3).map((b) => (
+              <div class="flex min-h-[234px] flex-col justify-center gap-8 rounded-[24px] bg-offwhite/4 px-6 py-8">
+                <p class="h3 text-offwhite">{b.n}</p>
+                <div class="flex flex-col gap-6">
+                  <h3 class="h4 text-offwhite">{b.title}</h3>
+                  <p class="body-df text-muted">{b.desc}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who we are -->
+  <section class="section-px flex flex-col items-center bg-white" data-node="1:1491">
+    <div class="container-site relative flex flex-col justify-center py-20 xl:h-[882px] xl:py-0">
+      <div class="flex flex-col items-start gap-10 xl:flex-row xl:items-center xl:gap-[10px]">
+        <div class="flex flex-1 flex-col gap-6">
+          <p class="eyebrow-deep self-start">who we are</p>
+          <div class="flex flex-col gap-12">
+            <h2 class="h1 flex flex-col text-deep">
+              <span class="opacity-60">A team that actually</span>
+              <span>answers the phone</span>
+            </h2>
+            <div class="body-lg flex max-w-[540px] flex-col gap-6 text-navy-100">
+              {whoWeAreCopy.map((p) => <p>{p}</p>)}
+            </div>
+          </div>
+        </div>
+        <div class="relative max-xl:self-center">
+          <!-- The Figma frame holds an empty image placeholder here; rendered as a neutral panel. -->
+          <div class="h-[500px] w-[min(544px,80vw)] rounded-[24px] bg-offwhite sm:w-[544px] xl:h-[673px]"></div>
+          <SpinBadge variant="brand" bordered class="absolute top-1/2 -left-[69px] -translate-y-1/2 max-md:hidden" />
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,37 @@
+---
+/**
+ * Circular "SPECIFY . SOURCE . DEPLOY" badge with a rotating text ring
+ * and a static arrow in the middle (Figma nodes 1:1085 / 1:1208 / 1:1383).
+ * Pass positioning classes (absolute/relative + offsets) via `class`.
+ */
+interface Props {
+  variant?: 'deep' | 'brand';
+  bordered?: boolean;
+  class?: string;
+}
+
+const { variant = 'brand', bordered = false, class: className = '' } = Astro.props;
+const bg = variant === 'deep' ? 'bg-deep' : 'bg-brand';
+const ring = bordered ? 'border-[12px] border-white' : '';
+// Keep the letter ring clear of the white border on bordered badges
+const r = bordered ? 45 : 54;
+const pathId = `spin-circle-${variant}-${bordered}`;
+---
+
+<div class={`size-[138px] shrink-0 ${className}`} aria-hidden="true">
+  <div class={`relative size-full overflow-clip rounded-full ${bg} ${ring}`}>
+    <img
+      src="/assets/solar-arrow-left-down-linear-ffcf2873.svg"
+      alt=""
+      class="absolute top-1/2 left-1/2 size-[62px] -translate-x-1/2 -translate-y-1/2"
+    />
+    <svg class={`animate-spin-slow absolute top-1/2 left-1/2 size-[138px] -translate-x-1/2 -translate-y-1/2`} viewBox="0 0 138 138">
+      <defs>
+        <path id={pathId} d={`M 69,69 m -${r},0 a ${r},${r} 0 1,1 ${r * 2},0 a ${r},${r} 0 1,1 -${r * 2},0`}></path>
+      </defs>
+      <text class="fill-offwhite font-sans text-[12px] font-semibold tracking-[2.5px] uppercase">
+        <textPath href={`#${pathId}`}>. SPECIFY . SOURCE . DEPLOY&nbsp;</textPath>
+      </text>
+    </svg>
+  </div>
+</div>

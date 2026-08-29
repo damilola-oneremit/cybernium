@@ -1,0 +1,74 @@
+---
+import SpinBadge from './SpinBadge.astro';
+import { services } from '../data/services';
+
+const year = 2026;
+---
+
+<footer class="footer-gradient section-px relative flex flex-col items-center pb-10 xl:pb-20" data-node="1:1342">
+  <SpinBadge variant="brand" bordered class="absolute -top-[70px] left-1/2 -translate-x-1/2 max-md:hidden" />
+  <div class="container-site flex flex-col pt-16 xl:pt-20">
+    <div class="flex flex-col gap-16 xl:gap-[104px]">
+      <div class="flex flex-col justify-between gap-6 md:flex-row md:items-start">
+        <a href="/" aria-label="Cybernium — home">
+          <img src="/assets/logo-e26be160.svg" alt="Cybernium" class="h-[34.85px] w-[244.4px]" />
+        </a>
+        <p class="body-lg flex flex-wrap gap-x-2 text-navy-100 md:justify-end">
+          <span>No. 23, Sabo Emir Palace,</span>
+          <span>Mokola Ibadan, Ibadan, Oyo State</span>
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-10">
+        <div class="flex flex-col justify-between gap-8 md:flex-row md:items-start">
+          <p class="h1 w-full max-w-[540px] text-navy">Work with us</p>
+          <div class="flex flex-col gap-6 md:items-end">
+            <a href="mailto:support@cybernium.co" class="h3 text-navy hover:text-brand-dark">support@cybernium.co</a>
+            <a href="/quote" class="btn-primary w-[142px]">Get a quote</a>
+          </div>
+        </div>
+
+        <div class="body-lg flex flex-wrap gap-x-[34px] gap-y-10">
+          <div class="flex w-[200px] flex-col gap-2">
+            <p class="font-bold text-navy">Services</p>
+            <ul class="flex flex-col gap-2 text-navy-100">
+              {
+                services.map((s) => (
+                  <li>
+                    <a href={`/services/${s.slug}`} class="hover:text-navy">
+                      {s.name}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+          <div class="flex w-[200px] flex-col gap-2">
+            <p class="font-bold text-navy">Quick links</p>
+            <ul class="flex flex-col gap-2 text-navy-100">
+              <li><a href="/" class="hover:text-navy">Home</a></li>
+              <li><a href="/about" class="hover:text-navy">About</a></li>
+            </ul>
+          </div>
+          <div class="flex w-[200px] flex-col gap-2">
+            <p class="font-bold text-navy">Socials</p>
+            <ul class="flex flex-col gap-2 text-navy-100">
+              <li>
+                <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" class="hover:text-navy">Linkedin</a>
+              </li>
+              <li>
+                <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" class="hover:text-navy">Facebook</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="body-lg mt-16 flex items-center justify-center gap-1 text-navy-100 xl:mt-[132px]">
+      <span>Copyright</span>
+      <img src="/assets/ph-copyright-07cf7877.svg" alt="©" class="size-5" />
+      <span>Cybernium Limited {year}</span>
+    </div>
+  </div>
+</footer>

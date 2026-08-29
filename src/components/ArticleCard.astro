@@ -1,0 +1,34 @@
+---
+interface Props {
+  title: string;
+  subtitle: string;
+  href: string;
+  image: string;
+  variant?: 'dark' | 'light';
+}
+
+const { title, subtitle, href, image, variant = 'dark' } = Astro.props;
+const isDark = variant === 'dark';
+---
+
+<a
+  href={href}
+  class:list={[
+    'group flex flex-1 flex-col gap-4 rounded-[24px] border p-2 transition-all duration-200',
+    isDark
+      ? 'border-navy-400 bg-navy hover:border-[#35455a] hover:drop-shadow-[0px_2px_8px_rgba(67,176,209,0.12)]'
+      : 'border-offwhite bg-white hover:drop-shadow-[0px_2px_8px_rgba(67,176,209,0.2)]',
+  ]}
+>
+  <div class="relative h-[278px] w-full overflow-hidden rounded-[16px] bg-white">
+    <img
+      src={image}
+      alt=""
+      class="absolute inset-0 size-full object-cover transition-transform duration-300 group-hover:scale-105"
+    />
+  </div>
+  <div class="flex flex-col gap-4 px-2 pb-6">
+    <h3 class:list={['h3', isDark ? 'text-offwhite group-hover:text-brand' : 'text-navy']}>{title}</h3>
+    <p class="body-df text-navy-100">{subtitle}</p>
+  </div>
+</a>

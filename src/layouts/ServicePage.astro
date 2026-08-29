@@ -1,0 +1,73 @@
+---
+import Base from './Base.astro';
+import BenefitsBanner from '../components/BenefitsBanner.astro';
+import type { Service } from '../data/services';
+
+interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+---
+
+<Base title={`${service.name} — Cybernium`} description={service.subtitle}>
+  <!-- Hero -->
+  <section class="hero-gradient section-px relative flex min-h-[560px] items-end justify-center overflow-clip pt-40 xl:h-[683px]">
+    <img
+      src="/assets/frame93-3c96e5a3.svg"
+      alt=""
+      class="pointer-events-none absolute right-[-197px] bottom-0 h-[555px] w-[783px] max-w-none max-lg:opacity-50"
+      aria-hidden="true"
+    />
+    <div class="container-site relative flex h-full items-end justify-center">
+      <div class="flex flex-col items-center gap-10 pb-14 xl:pb-20">
+        <div class="flex flex-col items-center gap-6">
+          <div class="flex flex-col items-center gap-6">
+            <p class="eyebrow-solid">{service.badge}</p>
+            <h1 class="h1 flex flex-col items-center text-center text-deep">
+              <span class="opacity-70">{service.h1Muted}</span>
+              <span>{service.h1Solid}</span>
+            </h1>
+          </div>
+          <p class="body-lg max-w-[587px] text-center text-navy-100">{service.subtitle}</p>
+        </div>
+        <a href="/quote" class="btn-primary w-[142px]">Get a quote</a>
+      </div>
+    </div>
+  </section>
+
+  <BenefitsBanner />
+
+  <!-- What's included -->
+  <section class="section-px flex flex-col items-center bg-white">
+    <div class="container-site flex flex-col justify-center gap-12 pt-10 pb-20 xl:min-h-[796px]">
+      <div class="flex flex-col items-start gap-6">
+        <p class="eyebrow-deep">WHat’s included</p>
+        <h2 class="h2 flex flex-col items-start gap-1 text-deep">
+          {
+            service.includedHeading.map((line) => (
+              <span class="flex flex-wrap items-center gap-x-[10px]">
+                {line.map((part) => (
+                  <span class:list={[part.muted && 'opacity-60']}>{part.text}</span>
+                ))}
+              </span>
+            ))
+          }
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 gap-x-9 gap-y-12 md:grid-cols-2 xl:grid-cols-3 xl:gap-y-[104px]">
+        {
+          service.features.map((f) => (
+            <div class="flex items-start gap-6">
+              <img src={f.icon} alt="" class="size-[34px] shrink-0" />
+              <div class="flex flex-col gap-5">
+                <h3 class="h4 text-navy">{f.title}</h3>
+                <p class="body-df text-ink-2">{f.desc}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>

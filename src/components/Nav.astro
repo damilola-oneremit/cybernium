@@ -1,0 +1,149 @@
+---
+import { services } from '../data/services';
+
+// Two-column split as designed in the Mega Menu frame
+const megaLeft = services.slice(0, 3);
+const megaRight = services.slice(3);
+---
+
+<header class="absolute top-[35px] left-1/2 z-50 w-[min(880px,calc(100%-32px))] -translate-x-1/2">
+  <nav class="relative rounded-[60px] bg-navy p-3" aria-label="Main">
+    <div class="flex w-full items-center justify-between">
+      <a href="/" class="flex h-[27.6px] w-[236px] shrink-0 items-center justify-center max-md:w-auto max-md:pl-4" aria-label="Cybernium — home">
+        <img src="/assets/nav-logo-5fe5bace.svg" alt="Cybernium" class="h-[27.6px] w-[193.6px] max-w-none" />
+      </a>
+
+      <div class="hidden items-center justify-end gap-10 lg:flex">
+        <div class="flex items-center gap-3">
+          <button
+            id="services-toggle"
+            type="button"
+            class="btn-label flex cursor-pointer items-center gap-1 rounded-[40px] px-4 py-2 text-offwhite transition-colors hover:bg-white/10"
+            aria-expanded="false"
+            aria-controls="mega-menu"
+          >
+            Services
+            <img src="/assets/nav-chevron-2c711e4a.svg" alt="" class="size-[18px] transition-transform duration-200" data-chevron />
+          </button>
+          <a href="/about" class="btn-label rounded-[40px] px-4 py-2 text-offwhite transition-colors hover:bg-white/10">About</a>
+          <a href="/blog" class="btn-label rounded-[40px] px-4 py-2 text-offwhite transition-colors hover:bg-white/10">Blog</a>
+        </div>
+        <a href="/quote" class="btn-white">Get a quote</a>
+      </div>
+
+      <button
+        id="mobile-toggle"
+        type="button"
+        class="mr-2 flex size-11 cursor-pointer flex-col items-center justify-center gap-1.5 rounded-full lg:hidden"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Open menu"
+      >
+        <span class="block h-0.5 w-5 rounded bg-offwhite transition-transform" data-bar-1></span>
+        <span class="block h-0.5 w-5 rounded bg-offwhite transition-opacity" data-bar-2></span>
+        <span class="block h-0.5 w-5 rounded bg-offwhite transition-transform" data-bar-3></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mega menu (desktop) -->
+  <div
+    id="mega-menu"
+    hidden
+    class="absolute top-[calc(100%+8px)] left-1/2 w-[683px] -translate-x-1/2 rounded-[16px] bg-line p-2 shadow-xl shadow-navy/10"
+  >
+    <div class="rounded-[8px] bg-white px-[33px] py-[52px]">
+      <div class="flex items-start justify-center gap-[54px]">
+        <div class="flex w-[238px] flex-col gap-[24px]">
+          {
+            megaLeft.map((s) => (
+              <a href={`/services/${s.slug}`} class="group flex items-start gap-2">
+                <img src={s.megaIcon} alt="" class="size-6 shrink-0" />
+                <span class="flex w-[206px] flex-col">
+                  <span class="h4 text-navy group-hover:text-brand-dark">{s.name}</span>
+                  <span class="body-df text-ink-2">{s.megaDesc}</span>
+                </span>
+              </a>
+            ))
+          }
+        </div>
+        <div class="w-px self-stretch bg-line"></div>
+        <div class="flex w-[255px] flex-col gap-[24px]">
+          {
+            megaRight.map((s) => (
+              <a href={`/services/${s.slug}`} class="group flex items-start gap-2">
+                <img src={s.megaIcon} alt="" class="size-6 shrink-0" />
+                <span class="flex flex-col">
+                  <span class="h4 text-navy group-hover:text-brand-dark">{s.name}</span>
+                  <span class="body-df w-[223px] text-ink-2">{s.megaDesc}</span>
+                </span>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" hidden class="mt-2 rounded-[24px] bg-navy p-6 lg:hidden">
+    <nav class="flex flex-col gap-1" aria-label="Mobile">
+      <p class="eyebrow-text px-2 pt-1 pb-2 text-left text-navy-50">Services</p>
+      {
+        services.map((s) => (
+          <a href={`/services/${s.slug}`} class="btn-label rounded-xl px-2 py-2.5 text-offwhite hover:bg-white/10">
+            {s.name}
+          </a>
+        ))
+      }
+      <div class="my-3 h-px bg-white/10"></div>
+      <a href="/about" class="btn-label rounded-xl px-2 py-2.5 text-offwhite hover:bg-white/10">About</a>
+      <a href="/blog" class="btn-label rounded-xl px-2 py-2.5 text-offwhite hover:bg-white/10">Blog</a>
+      <a href="/quote" class="btn-white mt-4 w-full">Get a quote</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const servicesToggle = document.getElementById('services-toggle');
+  const megaMenu = document.getElementById('mega-menu');
+  const chevron = servicesToggle?.querySelector('[data-chevron]');
+  const mobileToggle = document.getElementById('mobile-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  function setMega(open: boolean) {
+    if (!megaMenu || !servicesToggle) return;
+    megaMenu.hidden = !open;
+    servicesToggle.setAttribute('aria-expanded', String(open));
+    chevron?.classList.toggle('rotate-180', open);
+  }
+
+  servicesToggle?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setMega(megaMenu?.hidden ?? true);
+  });
+
+  document.addEventListener('click', (e) => {
+    if (megaMenu && !megaMenu.hidden && !megaMenu.contains(e.target as Node)) setMega(false);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      setMega(false);
+      setMobile(false);
+    }
+  });
+
+  function setMobile(open: boolean) {
+    if (!mobileMenu || !mobileToggle) return;
+    mobileMenu.hidden = !open;
+    mobileToggle.setAttribute('aria-expanded', String(open));
+    mobileToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    mobileToggle.querySelector('[data-bar-1]')?.classList.toggle('translate-y-2', open);
+    mobileToggle.querySelector('[data-bar-1]')?.classList.toggle('rotate-45', open);
+    mobileToggle.querySelector('[data-bar-2]')?.classList.toggle('opacity-0', open);
+    mobileToggle.querySelector('[data-bar-3]')?.classList.toggle('-translate-y-2', open);
+    mobileToggle.querySelector('[data-bar-3]')?.classList.toggle('-rotate-45', open);
+  }
+
+  mobileToggle?.addEventListener('click', () => setMobile(mobileMenu?.hidden ?? true));
+</script>

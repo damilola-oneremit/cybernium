@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+@theme {
+  /* Fonts — Figma: Red Hat Display (headings), Inter (body) */
+  --font-display: "Red Hat Display", "Avenir Next", "Segoe UI", sans-serif;
+  --font-sans: "Inter", "Helvetica Neue", Arial, sans-serif;
+
+  /* Colors — Figma variables */
+  --color-brand: #0c97d6; /* Brand/Primary */
+  --color-brand-dark: #0a7cb0; /* Brand/Primary-hover */
+  --color-deep: #004c6e; /* section heading blue */
+  --color-navy: #0b1e33; /* Base/Navy/500, Text/Primary */
+  --color-navy-400: #203246;
+  --color-navy-100: #5f6d81;
+  --color-navy-50: #9fa8bc;
+  --color-offwhite: #f7f8fa; /* Base/Off-white, Text/Inverse */
+  --color-line: #e2e5ea; /* Border/Default */
+  --color-ink-2: #5a5e66; /* Text/Secondary */
+  --color-muted: #8a8f98; /* Text/Muted */
+  --color-placeholder: #b9c2ce;
+  --color-input-line: #ebeff5;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply font-sans text-navy bg-white antialiased;
+  }
+}
+
+/* Typography scale — desktop values from Figma, stepped down for small screens */
+@utility h1 {
+  @apply font-display font-black text-[36px] leading-[1] tracking-[-0.01em] md:text-[44px] xl:text-[52px] xl:leading-[52px] xl:tracking-[-0.52px];
+}
+@utility h2 {
+  @apply font-display font-black text-[28px] leading-[1] tracking-[-0.01em] xl:text-[34px] xl:leading-[34px] xl:tracking-[-0.34px];
+}
+@utility h3 {
+  @apply font-display font-extrabold text-[20px] leading-[26px] tracking-[-0.01em] xl:text-[22px] xl:leading-[28px] xl:tracking-[-0.22px];
+}
+@utility h4 {
+  @apply font-display font-extrabold text-[17px] leading-[17px];
+}
+@utility body-lg {
+  @apply font-sans text-[17px] leading-[25px] font-normal;
+}
+@utility body-df {
+  @apply font-sans text-[15px] leading-[23px] font-normal;
+}
+@utility btn-label {
+  @apply font-sans font-medium text-[16px] leading-[20px];
+}
+
+/* Pill buttons */
+@utility btn-primary {
+  @apply font-sans font-medium text-[16px] leading-[20px] inline-flex items-center justify-center gap-1 rounded-[40px] px-4 py-3 transition-colors duration-200 cursor-pointer bg-navy text-white hover:bg-navy-400;
+}
+@utility btn-white {
+  @apply font-sans font-medium text-[16px] leading-[20px] inline-flex items-center justify-center gap-1 rounded-[40px] px-4 py-3 transition-colors duration-200 cursor-pointer bg-white text-navy hover:bg-offwhite;
+}
+@utility btn-outline {
+  @apply font-sans font-medium text-[16px] leading-[20px] inline-flex items-center justify-center gap-1 rounded-[40px] px-4 py-3 transition-colors duration-200 cursor-pointer border border-navy text-navy hover:bg-navy/5;
+}
+@utility btn-outline-white {
+  @apply font-sans font-medium text-[16px] leading-[20px] inline-flex items-center justify-center gap-1 rounded-[40px] px-4 py-3 transition-colors duration-200 cursor-pointer border border-white text-white hover:bg-white/10;
+}
+
+/* Eyebrow badges */
+@utility eyebrow-text {
+  @apply font-sans font-semibold text-[12px] leading-4 tracking-[0.96px] uppercase text-center;
+}
+@utility eyebrow-solid {
+  @apply font-sans font-semibold text-[12px] leading-4 tracking-[0.96px] uppercase text-center inline-flex w-fit items-center justify-center rounded-[40px] border px-3 py-1.5 bg-brand-dark border-[#2a63a3] text-white;
+}
+@utility eyebrow-deep {
+  @apply font-sans font-semibold text-[12px] leading-4 tracking-[0.96px] uppercase text-center inline-flex w-fit items-center justify-center rounded-[40px] border px-3 py-1.5 bg-deep/8 border-deep text-deep;
+}
+@utility eyebrow-light {
+  @apply font-sans font-semibold text-[12px] leading-4 tracking-[0.96px] uppercase text-center inline-flex w-fit items-center justify-center rounded-[40px] border px-3 py-1.5 bg-deep/8 border-offwhite text-offwhite;
+}
+
+/* Section shell: full-bleed background, 1280px content */
+@utility section-px {
+  @apply px-5 sm:px-10 xl:px-20;
+}
+@utility container-site {
+  @apply w-full max-w-[1280px] mx-auto;
+}
+
+/* Request-a-quote form fields (Figma "RRQ form components") */
+@utility rrq-field {
+  @apply flex min-h-[89px] flex-1 flex-col justify-center gap-2 rounded-[16px] border border-input-line bg-offwhite px-6 py-4 transition-colors focus-within:border-brand;
+}
+@utility rrq-label {
+  @apply font-sans text-[12px] leading-4 font-semibold tracking-[0.96px] text-navy uppercase;
+}
+@utility rrq-input {
+  @apply w-full border-none bg-transparent font-sans text-[17px] leading-[25px] text-navy outline-none placeholder:text-placeholder;
+}
+
+@layer components {
+  .rrq-field:has(:user-invalid) {
+    border-color: #fca5a5;
+  }
+  /* Unselected <select> shows its placeholder option in placeholder gray */
+  .rrq-input:invalid {
+    color: var(--color-placeholder);
+  }
+}
+
+@utility hero-gradient {
+  background-image: linear-gradient(180deg, #1b94ca 0.34%, #ffffff 101.27%);
+}
+@utility footer-gradient {
+  background-image: linear-gradient(179deg, #ffffff 30.1%, #57b6e1 166.85%);
+}
+
+/* Benefits banner marquee */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@utility animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+
+/* Rotating circular badge text */
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@utility animate-spin-slow {
+  animation: spin-slow 18s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-spin-slow {
+    animation: none;
+  }
+}

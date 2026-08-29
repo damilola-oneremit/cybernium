@@ -1,0 +1,59 @@
+---
+import Base from '../../layouts/Base.astro';
+import { articles } from '../../data/articles';
+
+export function getStaticPaths() {
+  return articles.map((article) => ({ params: { slug: article.slug }, props: { article } }));
+}
+
+const { article } = Astro.props;
+---
+
+<Base title={`${article.title} — Cybernium`} description={article.detailSubtitle}>
+  <section class="section-px flex flex-col items-center overflow-clip bg-white" data-node="1:1637">
+    <div class="container-site flex flex-col gap-12 pt-40 pb-20 xl:py-[200px]">
+      <div class="flex flex-col gap-8">
+        <nav class="body-lg flex flex-wrap gap-x-4 gap-y-1" aria-label="Breadcrumb">
+          <a href="/blog" class="text-brand hover:text-brand-dark">Blog</a>
+          <span class="text-muted">/</span>
+          <span class="text-muted">{article.title}</span>
+        </nav>
+        <div class="flex flex-col items-start justify-center gap-8 xl:h-[556px] xl:flex-row xl:gap-12">
+          <div class="relative h-[300px] w-full shrink-0 overflow-hidden rounded-[16px] bg-white sm:h-[420px] xl:h-full xl:w-[749px]">
+            <img src={article.thumb} alt="" class="absolute inset-0 size-full object-cover" />
+          </div>
+          <div class="flex flex-1 flex-col gap-[38px] xl:py-12">
+            <div class="flex flex-col gap-4 text-navy">
+              <h1 class="h1">{article.title}</h1>
+              <p class="body-lg">{article.detailSubtitle}</p>
+            </div>
+            <div class="body-lg flex flex-wrap items-center text-muted">
+              <span>{article.author}</span>
+              <span class="mx-2.5 select-none" aria-hidden="true">•</span>
+              <span>{article.date}</span>
+              <span class="mx-2.5 select-none" aria-hidden="true">•</span>
+              <span>{article.readTime}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <article class="flex flex-col gap-12 text-navy">
+        <p class="body-lg">{article.intro}</p>
+        {
+          article.sections.map((section) => (
+            <div class="flex flex-col gap-4">
+              {section.heading && <h2 class="h3">{section.heading}</h2>}
+              {section.paragraphs.map((p) => (
+                <p class="body-lg">
+                  {p.lead && <strong class="h4">{p.lead}</strong>}
+                  {p.text}
+                </p>
+              ))}
+            </div>
+          ))
+        }
+      </article>
+    </div>
+  </section>
+</Base>

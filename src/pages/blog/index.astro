@@ -1,0 +1,51 @@
+---
+import Base from '../../layouts/Base.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { articles } from '../../data/articles';
+
+// The Figma blog grid shows two rows of the same three articles.
+const grid = [...articles, ...articles];
+---
+
+<Base title="Blog — Cybernium" description="Practical field notes on infrastructure, networking, procurement, security, and where AI actually fits.">
+  <!-- Hero -->
+  <section class="hero-gradient section-px relative flex min-h-[400px] items-end justify-center overflow-clip pt-36 xl:h-[444px]" data-node="1:1612">
+    <img
+      src="/assets/blog-list-hero-deco-a0e89a8d.svg"
+      alt=""
+      class="pointer-events-none absolute top-0 right-[-197px] h-[555px] w-[783px] max-w-none max-lg:opacity-50"
+      aria-hidden="true"
+    />
+    <div class="container-site relative flex h-full items-end justify-center">
+      <div class="flex flex-col items-center gap-6 pb-14 xl:pb-20">
+        <div class="flex flex-col items-center gap-6">
+          <p class="eyebrow-solid">BLOG</p>
+          <h1 class="h1 text-center text-deep">Field notes</h1>
+        </div>
+        <p class="body-lg max-w-[523px] text-center text-navy-100">
+          Practical field notes, not sales copy — on infrastructure, networking, procurement, security, and where AI
+          actually fits.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Articles -->
+  <section class="section-px flex flex-col items-center bg-white" data-node="1:1622">
+    <div class="container-site flex flex-col justify-center gap-[38px] py-20 xl:min-h-[1024px]">
+      <div class="grid grid-cols-1 gap-x-2 gap-y-[38px] md:grid-cols-2 xl:grid-cols-3">
+        {
+          grid.map((a) => (
+            <ArticleCard
+              title={a.title}
+              subtitle={a.subtitle}
+              href={`/blog/${a.slug}`}
+              image="/assets/blog-list-thumb-6e5cd439.png"
+              variant="light"
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>
