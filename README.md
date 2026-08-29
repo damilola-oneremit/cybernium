@@ -1,0 +1,2 @@
+# cybernium
+Static website
