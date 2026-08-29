@@ -61,21 +61,21 @@ const industries = [
 <Base title="Cybernium — Business technology, delivered">
   <!-- Hero: fills the desktop viewport so the next section starts below the fold -->
   <section class="hero-gradient section-px relative flex flex-col items-center justify-end overflow-clip" data-node="1:1068">
-    <!-- Technician cutout, anchored bottom-center behind the text columns -->
+    <!-- Technician cutout, anchored to the hero bottom as in the Figma frame -->
     <img
       src="/assets/hero-person-9923ffe4.png"
       alt=""
-      class="pointer-events-none absolute bottom-0 left-1/2 hidden h-[min(660px,72svh)] w-auto max-w-none -translate-x-[52%] xl:block"
+      class="pointer-events-none absolute bottom-0 left-[calc(50%-78px)] hidden h-[666px] w-auto max-w-none -translate-x-1/2 xl:block"
       aria-hidden="true"
     />
     <!-- Bottom fade into the white section below (Figma node 1:1083) -->
     <div
-      class="pointer-events-none absolute inset-x-0 bottom-0 hidden h-[220px] bg-gradient-to-t from-white via-white/70 to-transparent xl:block"
+      class="pointer-events-none absolute inset-x-0 bottom-0 hidden h-[200px] bg-gradient-to-t from-white via-white/70 to-transparent xl:block"
       aria-hidden="true"
     ></div>
-    <div class="container-site relative flex flex-col justify-between pt-32 max-xl:gap-10 xl:h-svh xl:max-h-[1100px] xl:min-h-[760px] xl:flex-row xl:items-center xl:pt-0">
-      <!-- Headline -->
-      <div class="flex h-full flex-col items-start xl:w-[399px] xl:shrink-0 xl:justify-center xl:pt-16">
+    <div class="container-site relative flex flex-col justify-between pt-32 max-xl:gap-10 xl:h-svh xl:max-h-[1100px] xl:min-h-[820px] xl:flex-row xl:items-stretch xl:pt-0">
+      <!-- Headline: fixed distance from the hero bottom, per the Figma frame -->
+      <div class="flex flex-col items-start xl:w-[399px] xl:shrink-0 xl:justify-end xl:pb-[376px]">
         <div class="flex flex-col items-start gap-8 xl:w-[374px]">
           <p class="eyebrow-solid">business technology, delivered</p>
           <h1 class="h1 flex flex-col text-deep">
@@ -102,7 +102,7 @@ const industries = [
       </div>
 
       <!-- Supporting copy -->
-      <div class="flex h-full flex-col items-start gap-10 xl:w-[300px] xl:shrink-0 xl:justify-end xl:gap-[66px] xl:pb-10">
+      <div class="flex flex-col items-start gap-10 xl:w-[300px] xl:shrink-0 xl:justify-end xl:gap-[66px] xl:pb-10">
         <SpinBadge variant="deep" class="max-xl:hidden" />
         <p class="body-lg text-navy-100">
           We specify, source, deploy, and support the systems your business runs on as one accountable partner, not a
