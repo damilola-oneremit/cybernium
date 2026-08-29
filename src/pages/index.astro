@@ -59,18 +59,23 @@ const industries = [
 ---
 
 <Base title="Cybernium — Business technology, delivered">
-  <!-- Hero -->
+  <!-- Hero: fills the desktop viewport so the next section starts below the fold -->
   <section class="hero-gradient section-px relative flex flex-col items-center justify-end overflow-clip" data-node="1:1068">
-    <!-- Composed technician render from Figma (node 1:1081) -->
+    <!-- Technician cutout, anchored bottom-center behind the text columns -->
     <img
-      src="/assets/hero-technician-8a988e73.png"
+      src="/assets/hero-person-9923ffe4.png"
       alt=""
-      class="pointer-events-none absolute inset-0 hidden size-full object-cover object-bottom xl:block"
+      class="pointer-events-none absolute bottom-0 left-1/2 hidden h-[min(660px,72svh)] w-auto max-w-none -translate-x-[52%] xl:block"
       aria-hidden="true"
     />
-    <div class="container-site relative flex flex-col justify-between pt-32 max-xl:gap-10 xl:h-[901px] xl:flex-row xl:items-center xl:pt-0">
+    <!-- Bottom fade into the white section below (Figma node 1:1083) -->
+    <div
+      class="pointer-events-none absolute inset-x-0 bottom-0 hidden h-[220px] bg-gradient-to-t from-white via-white/70 to-transparent xl:block"
+      aria-hidden="true"
+    ></div>
+    <div class="container-site relative flex flex-col justify-between pt-32 max-xl:gap-10 xl:h-svh xl:max-h-[1100px] xl:min-h-[760px] xl:flex-row xl:items-center xl:pt-0">
       <!-- Headline -->
-      <div class="flex h-full flex-col items-start xl:w-[399px] xl:shrink-0 xl:pt-[200px]">
+      <div class="flex h-full flex-col items-start xl:w-[399px] xl:shrink-0 xl:justify-center xl:pt-16">
         <div class="flex flex-col items-start gap-8 xl:w-[374px]">
           <p class="eyebrow-solid">business technology, delivered</p>
           <h1 class="h1 flex flex-col text-deep">
@@ -86,10 +91,14 @@ const industries = [
       <!-- Technician image (stacked variant for smaller screens) -->
       <div class="relative h-[420px] w-full max-xl:order-last xl:hidden">
         <img
-          src="/assets/hero-technician-8a988e73.png"
-          alt="Technician doing a checkup in a server room"
-          class="pointer-events-none absolute inset-0 size-full object-cover object-bottom"
+          src="/assets/hero-person-9923ffe4.png"
+          alt="Technician consulting a tablet"
+          class="pointer-events-none absolute bottom-0 left-1/2 h-full w-auto max-w-none -translate-x-[58%] object-bottom"
         />
+        <div
+          class="pointer-events-none absolute inset-x-0 bottom-0 h-[120px] bg-gradient-to-t from-white via-white/70 to-transparent"
+          aria-hidden="true"
+        ></div>
       </div>
 
       <!-- Supporting copy -->
