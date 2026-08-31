@@ -25,7 +25,7 @@ const nextSteps = [
       aria-hidden="true"
     />
     <div class="container-site relative flex h-full items-end justify-center">
-      <div class="flex flex-col items-center gap-6 pb-14 xl:pb-20">
+      <div class="flex flex-col items-center gap-6 pb-14 xl:pb-20" data-reveal>
         <div class="flex flex-col items-center gap-6">
           <p class="eyebrow-solid">request a quote</p>
           <h1 class="h1 text-center text-deep">Tell us what you need</h1>
@@ -41,7 +41,7 @@ const nextSteps = [
   <!-- Form -->
   <section class="section-px flex flex-col items-center bg-white" data-node="1:1549">
     <div class="container-site flex flex-col items-center gap-12 pt-10 pb-20">
-      <form id="quote-form" class="flex w-full max-w-[957px] flex-col gap-6" novalidate>
+      <form id="quote-form" class="flex w-full max-w-[957px] flex-col gap-6" novalidate data-reveal>
         <div class="flex flex-col gap-6 md:flex-row">
           <label class="rrq-field">
             <span class="rrq-label">Full name**</span>
@@ -122,7 +122,7 @@ const nextSteps = [
         <button type="submit" class="btn-primary self-start">Request a quote</button>
       </form>
 
-      <div class="flex w-full max-w-[957px] flex-col gap-6">
+      <div class="flex w-full max-w-[957px] flex-col gap-6" data-reveal-stagger>
         <div class="flex flex-col gap-14 rounded-[24px] border border-line bg-offwhite p-6 sm:p-8">
           <h2 class="h3 text-navy">What happens next</h2>
           <ol class="flex flex-col gap-12">

@@ -20,7 +20,7 @@ const { service } = Astro.props;
       aria-hidden="true"
     />
     <div class="container-site relative flex h-full items-end justify-center">
-      <div class="flex flex-col items-center gap-10 pb-14 xl:pb-20">
+      <div class="flex flex-col items-center gap-10 pb-14 xl:pb-20" data-reveal>
         <div class="flex flex-col items-center gap-6">
           <div class="flex flex-col items-center gap-6">
             <p class="eyebrow-solid">{service.badge}</p>
@@ -41,7 +41,7 @@ const { service } = Astro.props;
   <!-- What's included -->
   <section class="section-px flex flex-col items-center bg-white">
     <div class="container-site flex flex-col justify-center gap-12 pt-10 pb-20 xl:min-h-[796px]">
-      <div class="flex flex-col items-start gap-6">
+      <div class="flex flex-col items-start gap-6" data-reveal>
         <p class="eyebrow-deep">WHat’s included</p>
         <h2 class="h2 flex flex-col items-start gap-1 text-deep">
           {
@@ -55,7 +55,7 @@ const { service } = Astro.props;
           }
         </h2>
       </div>
-      <div class="grid grid-cols-1 gap-x-9 gap-y-12 md:grid-cols-2 xl:grid-cols-3 xl:gap-y-[104px]">
+      <div class="grid grid-cols-1 gap-x-9 gap-y-12 md:grid-cols-2 xl:grid-cols-3 xl:gap-y-[104px]" data-reveal-stagger>
         {
           service.features.map((f) => (
             <div class="flex items-start gap-6">

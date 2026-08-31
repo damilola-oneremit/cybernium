@@ -67,6 +67,10 @@ const industries = [
       alt=""
       class="pointer-events-none absolute bottom-[-6.7svh] left-[calc(50%-72px)] hidden h-[80.6svh] w-auto max-w-none -translate-x-1/2 xl:block"
       aria-hidden="true"
+      data-reveal
+      data-reveal-x="-50%"
+      data-reveal-y="160"
+      data-reveal-duration="870"
     />
     <!-- Bottom fade into the white section below (Figma "Rectangle 10", 333/901 of hero height) -->
     <div
@@ -77,13 +81,13 @@ const industries = [
       <!-- Headline: bottom offset proportional to hero height, per the Figma frame (376/901) -->
       <div class="flex flex-col items-start xl:w-[399px] xl:shrink-0 xl:justify-end xl:pb-[42svh]">
         <div class="flex flex-col items-start gap-8 xl:w-[374px]">
-          <p class="eyebrow-solid">business technology, delivered</p>
+          <p class="eyebrow-solid" data-reveal data-reveal-delay="100">business technology, delivered</p>
           <h1 class="h1 flex flex-col text-deep">
-            <span class="opacity-70">Technology</span>
-            <span class="opacity-70">Infrastructure</span>
-            <span>that keeps</span>
-            <span>your business</span>
-            <span>running</span>
+            <span class="opacity-70" data-reveal data-reveal-delay="200" data-reveal-y="20">Technology</span>
+            <span class="opacity-70" data-reveal data-reveal-delay="250" data-reveal-y="20">Infrastructure</span>
+            <span data-reveal data-reveal-delay="368" data-reveal-y="20">that keeps</span>
+            <span data-reveal data-reveal-delay="454" data-reveal-y="20">your business</span>
+            <span data-reveal data-reveal-delay="544" data-reveal-y="20">running</span>
           </h1>
         </div>
       </div>
@@ -104,12 +108,14 @@ const industries = [
 
       <!-- Supporting copy -->
       <div class="flex flex-col items-start gap-10 xl:w-[300px] xl:shrink-0 xl:justify-end xl:gap-[66px] xl:pb-10">
-        <SpinBadge variant="deep" class="max-xl:hidden" />
-        <p class="body-lg text-navy-100">
+        <div class="max-xl:hidden" data-reveal data-reveal-delay="500">
+          <SpinBadge variant="deep" />
+        </div>
+        <p class="body-lg text-navy-100" data-reveal data-reveal-y="120" data-reveal-duration="800">
           We specify, source, deploy, and support the systems your business runs on as one accountable partner, not a
           string of vendors passing you between them.
         </p>
-        <a href="/quote" class="btn-primary w-[142px]">Get a quote</a>
+        <a href="/quote" class="btn-primary w-[142px]" data-reveal data-reveal-delay="700" data-reveal-y="16">Get a quote</a>
       </div>
     </div>
   </section>
@@ -117,7 +123,7 @@ const industries = [
   <!-- Services -->
   <section class="section-px flex flex-col items-center overflow-clip bg-white" data-node="1:1121">
     <div class="container-site flex flex-col justify-center gap-[38px] py-20 xl:h-[1104px] xl:py-0">
-      <div class="flex flex-col gap-6">
+      <div class="flex flex-col gap-6" data-reveal>
         <p class="eyebrow-deep">what we deliver</p>
         <div class="flex flex-col gap-8 xl:gap-12">
           <h2 class="h1 flex flex-col text-deep">
@@ -134,7 +140,7 @@ const industries = [
         </div>
       </div>
       <div class="flex flex-col gap-2">
-        <div class="grid grid-cols-1 gap-2 md:grid-cols-3">
+        <div class="grid grid-cols-1 gap-2 md:grid-cols-3" data-reveal-stagger>
           {
             row1.map((slug) => (
               <a
@@ -150,7 +156,7 @@ const industries = [
             ))
           }
         </div>
-        <div class="grid grid-cols-1 gap-2 md:grid-cols-3">
+        <div class="grid grid-cols-1 gap-2 md:grid-cols-3" data-reveal-stagger>
           {
             row2.map((slug) => (
               <a
@@ -179,7 +185,7 @@ const industries = [
   <section class="section-px flex flex-col items-center justify-center overflow-clip bg-white" data-node="1:1192">
     <div class="container-site relative flex items-center justify-center py-20 xl:h-[1024px] xl:py-0">
       <div class="flex w-full flex-col items-start justify-between gap-12 xl:flex-row">
-        <div class="flex flex-col gap-10 xl:max-w-[660px] xl:gap-14">
+        <div class="flex flex-col gap-10 xl:max-w-[660px] xl:gap-14" data-reveal>
           <div class="flex flex-col gap-6">
             <p class="eyebrow-deep">featured capability</p>
             <div class="flex flex-col gap-8">
@@ -200,7 +206,7 @@ const industries = [
           </div>
           <a href="/services/ai-automation" class="btn-outline self-start">Explore AI &amp; Automation</a>
         </div>
-        <div class="relative h-[500px] w-full max-w-[544px] max-xl:self-center max-md:mt-10 xl:h-[673px] xl:shrink-0">
+        <div class="relative h-[500px] w-full max-w-[544px] max-xl:self-center max-md:mt-10 xl:h-[673px] xl:shrink-0" data-reveal>
           <div class="relative size-full overflow-hidden rounded-[24px]">
             <img
               src="/assets/featured-automation-4846859a.png"
@@ -221,7 +227,7 @@ const industries = [
   <!-- How we work -->
   <section class="section-px flex flex-col items-center justify-center overflow-clip bg-navy" data-node="1:1240">
     <div class="container-site flex flex-col items-center gap-[72px] py-20 xl:py-[120px]">
-      <div class="flex flex-col items-center gap-6">
+      <div class="flex flex-col items-center gap-6" data-reveal>
         <p class="eyebrow-light">HOW WE WORK</p>
         <div class="flex flex-col items-center gap-8 text-center">
           <h2 class="h1 flex max-w-[540px] flex-col items-center text-offwhite">
@@ -231,7 +237,7 @@ const industries = [
           <p class="body-lg max-w-[540px] text-navy-50">Five steps, one team, no surprises along the way.</p>
         </div>
       </div>
-      <div class="flex w-full flex-col">
+      <div class="flex w-full flex-col" data-reveal-stagger>
         {
           steps.map((step, i) => (
             <div class="flex w-full items-stretch">
@@ -273,7 +279,7 @@ const industries = [
   <!-- Industries carousel -->
   <section class="section-px flex flex-col items-center bg-white" data-node="1:1291">
     <div class="container-site flex flex-col justify-center gap-14 py-20 xl:h-[1024px] xl:py-0">
-      <div class="flex flex-col justify-between gap-8 xl:flex-row xl:items-end">
+      <div class="flex flex-col justify-between gap-8 xl:flex-row xl:items-end" data-reveal>
         <div class="flex flex-col gap-6">
           <p class="eyebrow-deep">who we work with</p>
           <div class="flex max-w-[602px] flex-col gap-8">
@@ -347,7 +353,7 @@ const industries = [
   <!-- Blog -->
   <section class="section-px flex flex-col items-center justify-center bg-navy" data-node="1:1294">
     <div class="container-site flex flex-col justify-center gap-12 py-20 xl:h-[1024px] xl:py-0">
-      <div class="flex max-w-[686px] flex-col gap-6">
+      <div class="flex max-w-[686px] flex-col gap-6" data-reveal>
         <p class="eyebrow-light">from the blog</p>
         <div class="flex flex-col gap-8">
           <h2 class="h1 flex flex-wrap gap-x-2 text-offwhite">
@@ -360,7 +366,7 @@ const industries = [
           </p>
         </div>
       </div>
-      <div class="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
+      <div class="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3" data-reveal-stagger>
         {
           articles.map((a) => (
             <ArticleCard
@@ -373,7 +379,7 @@ const industries = [
           ))
         }
       </div>
-      <a href="/blog" class="btn-outline-white self-start">
+      <a href="/blog" class="btn-outline-white self-start" data-reveal>
         View all articles
         <img src="/assets/arrow-right-white-ace32ec2.svg" alt="" class="size-[18px]" />
       </a>
@@ -383,7 +389,7 @@ const industries = [
   <!-- FAQs -->
   <section class="section-px flex flex-col items-center bg-white" data-node="1:1316">
     <div class="container-site flex flex-col items-center gap-[88px] py-20 xl:py-[100px]">
-      <div class="flex max-w-[678px] flex-col items-center gap-6">
+      <div class="flex max-w-[678px] flex-col items-center gap-6" data-reveal>
         <p class="eyebrow-deep">QUESTIONS</p>
         <div class="flex flex-col items-center gap-8">
           <h2 class="h1 flex flex-wrap items-center justify-center gap-x-[10px] text-center text-deep">
@@ -395,7 +401,7 @@ const industries = [
           </p>
         </div>
       </div>
-      <div class="flex w-full max-w-[770px] flex-col gap-6">
+      <div class="flex w-full max-w-[770px] flex-col gap-6" data-reveal-stagger>
         {
           faqs.map((faq, i) => (
             <div class="flex flex-col gap-4 border-b border-line pb-4" data-faq>

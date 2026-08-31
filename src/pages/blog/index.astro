@@ -17,7 +17,7 @@ const grid = [...articles, ...articles];
       aria-hidden="true"
     />
     <div class="container-site relative flex h-full items-end justify-center">
-      <div class="flex flex-col items-center gap-6 pb-14 xl:pb-20">
+      <div class="flex flex-col items-center gap-6 pb-14 xl:pb-20" data-reveal>
         <div class="flex flex-col items-center gap-6">
           <p class="eyebrow-solid">BLOG</p>
           <h1 class="h1 text-center text-deep">Field notes</h1>
@@ -33,7 +33,7 @@ const grid = [...articles, ...articles];
   <!-- Articles -->
   <section class="section-px flex flex-col items-center bg-white" data-node="1:1622">
     <div class="container-site flex flex-col justify-center gap-[38px] py-20 xl:min-h-[1024px]">
-      <div class="grid grid-cols-1 gap-x-2 gap-y-[38px] md:grid-cols-2 xl:grid-cols-3">
+      <div class="grid grid-cols-1 gap-x-2 gap-y-[38px] md:grid-cols-2 xl:grid-cols-3" data-reveal-stagger>
         {
           grid.map((a) => (
             <ArticleCard

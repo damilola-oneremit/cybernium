@@ -130,14 +130,19 @@
   animation: marquee 28s linear infinite;
 }
 
-/* Rotating circular badge text */
+/* Rotating circular badge text — one revolution per 8s timeline (Figma motion spec) */
 @keyframes spin-slow {
   to {
     transform: rotate(360deg);
   }
 }
 @utility animate-spin-slow {
-  animation: spin-slow 18s linear infinite;
+  animation: spin-slow 8s linear infinite;
+}
+
+/* Lenis drives programmatic scrolling; CSS smooth stays as the no-JS fallback */
+html.lenis {
+  scroll-behavior: auto;
 }
 
 @media (prefers-reduced-motion: reduce) {
