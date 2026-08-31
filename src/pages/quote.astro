@@ -106,16 +106,21 @@ const nextSteps = [
         <div class="flex flex-col gap-2">
           <p class="body-lg text-navy">Attachments</p>
           <label
-            class="flex h-[162px] w-full cursor-pointer flex-col items-center justify-center gap-4 rounded-[16px] border border-input-line bg-offwhite px-6 py-4 transition-colors hover:border-line"
+            class="flex min-h-[162px] w-full cursor-pointer flex-col items-center justify-center gap-4 rounded-[16px] border border-input-line bg-offwhite px-6 py-4 transition-colors hover:border-line"
           >
             <input type="file" name="attachments" accept=".jpg,.jpeg,.png,.pdf" multiple class="sr-only" />
             <span class="flex items-center gap-1.5 rounded-[8px] border border-input-line bg-white px-2 py-1 drop-shadow-[0px_4px_2px_rgba(69,94,123,0.12)]">
-              <img src="/assets/mynaui-upload-e225e959.svg" alt="" class="size-[18px]" />
-              <span class="body-df text-navy">Select file(s)</span>
+              <svg data-upload-spinner viewBox="0 0 24 24" fill="none" class="hidden size-[18px] animate-spin text-brand" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-opacity="0.25" stroke-width="3"></circle>
+                <path d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
+              </svg>
+              <img data-upload-icon src="/assets/mynaui-upload-e225e959.svg" alt="" class="size-[18px]" />
+              <span class="body-df text-navy" data-upload-label>Select file(s)</span>
             </span>
             <span class="eyebrow-text text-placeholder" data-file-note>
               A spec sheet, floor plan or existing rfq. <span class="text-muted">jpg, png or pdf</span>
             </span>
+            <span class="body-df hidden max-w-full text-center break-words text-navy" data-file-list aria-live="polite"></span>
           </label>
         </div>
 
@@ -205,14 +210,59 @@ const nextSteps = [
   const toastSuccess = document.getElementById('toast-success');
   const toastInfo = document.getElementById('toast-info');
   const fileInput = form?.querySelector<HTMLInputElement>('input[type="file"]');
-  const fileNote = document.querySelector('[data-file-note]');
+  const fileNote = document.querySelector<HTMLElement>('[data-file-note]');
+  const fileList = document.querySelector<HTMLElement>('[data-file-list]');
+  const uploadLabel = document.querySelector<HTMLElement>('[data-upload-label]');
+  const uploadIcon = document.querySelector<HTMLElement>('[data-upload-icon]');
+  const uploadSpinner = document.querySelector<HTMLElement>('[data-upload-spinner]');
+
+  // Picked files accumulate across selections; the merged set backs input.files
+  // so the form always submits everything chosen so far.
+  const picked = new DataTransfer();
+
+  function setUploading(uploading: boolean, count = 0) {
+    uploadSpinner?.classList.toggle('hidden', !uploading);
+    uploadIcon?.classList.toggle('hidden', uploading);
+    if (uploadLabel) {
+      uploadLabel.textContent = uploading
+        ? `Uploading ${count} file${count === 1 ? '' : 's'}...`
+        : picked.files.length
+          ? 'Select more file(s)'
+          : 'Select file(s)';
+    }
+  }
+
+  function renderFileStack() {
+    const names = Array.from(picked.files).map((f) => f.name);
+    if (fileList) {
+      fileList.textContent = names.join(', ');
+      fileList.classList.toggle('hidden', names.length === 0);
+    }
+    fileNote?.classList.toggle('hidden', names.length > 0);
+  }
+
+  function resetUploadField() {
+    if (fileInput) fileInput.value = '';
+    while (picked.items.length) picked.items.remove(0);
+    setUploading(false);
+    renderFileStack();
+  }
 
   fileInput?.addEventListener('change', () => {
-    if (fileNote && fileInput.files?.length) {
-      fileNote.textContent = Array.from(fileInput.files)
-        .map((f) => f.name)
-        .join(', ');
+    const incoming = Array.from(fileInput.files ?? []);
+    if (!incoming.length) return;
+    for (const f of incoming) {
+      const dup = Array.from(picked.files).some((p) => p.name === f.name && p.size === f.size);
+      if (!dup) picked.items.add(f);
     }
+    // Static site — no upload endpoint. Briefly show the design's uploading
+    // state, then settle into the uploaded file-name stack.
+    setUploading(true, incoming.length);
+    window.setTimeout(() => {
+      fileInput.files = picked.files;
+      setUploading(false);
+      renderFileStack();
+    }, 600 + incoming.length * 250);
   });
 
   document.querySelectorAll('[data-toast-close]').forEach((btn) =>
@@ -260,7 +310,7 @@ const nextSteps = [
     toastInfo?.setAttribute('hidden', '');
     showToast(toastSuccess);
     form.reset();
-    if (fileNote) fileNote.innerHTML = 'A spec sheet, floor plan or existing rfq. <span class="text-muted">jpg, png or pdf</span>';
+    resetUploadField();
   });
 
   document.getElementById('send-new-request')?.addEventListener('click', () => {
