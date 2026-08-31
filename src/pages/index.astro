@@ -99,6 +99,7 @@ const industries = [
           class="pointer-events-none absolute inset-x-0 bottom-0 h-[120px] bg-gradient-to-t from-white via-white/70 to-transparent"
           aria-hidden="true"
         ></div>
+        <SpinBadge variant="deep" class="absolute top-2 right-0 max-sm:scale-75 max-sm:origin-top-right" />
       </div>
 
       <!-- Supporting copy -->
@@ -199,15 +200,19 @@ const industries = [
           </div>
           <a href="/services/ai-automation" class="btn-outline self-start">Explore AI &amp; Automation</a>
         </div>
-        <div class="relative max-xl:self-center">
-          <div class="relative h-[500px] w-full max-w-[544px] overflow-hidden rounded-[24px] sm:w-[544px] xl:h-[673px]">
+        <div class="relative h-[500px] w-full max-w-[544px] max-xl:self-center max-md:mt-10 xl:h-[673px] xl:shrink-0">
+          <div class="relative size-full overflow-hidden rounded-[24px]">
             <img
               src="/assets/featured-automation-4846859a.png"
               alt="AI automation touchpoints"
               class="absolute inset-0 size-full rounded-[24px] object-cover"
             />
           </div>
-          <SpinBadge variant="brand" bordered class="absolute top-[40%] -left-[69px] max-md:hidden" />
+          <SpinBadge
+            variant="brand"
+            bordered
+            class="absolute md:top-[40%] md:-left-[69px] max-md:-top-[60px] max-md:left-1/2 max-md:-translate-x-1/2"
+          />
         </div>
       </div>
     </div>

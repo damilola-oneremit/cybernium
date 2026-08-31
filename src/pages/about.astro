@@ -145,10 +145,14 @@ const whoWeAreCopy = [
             </div>
           </div>
         </div>
-        <div class="relative max-xl:self-center">
+        <div class="relative h-[500px] w-full max-w-[544px] max-xl:self-center max-md:mt-10 xl:h-[673px] xl:shrink-0">
           <!-- The Figma frame holds an empty image placeholder here; rendered as a neutral panel. -->
-          <div class="h-[500px] w-[min(544px,80vw)] rounded-[24px] bg-offwhite sm:w-[544px] xl:h-[673px]"></div>
-          <SpinBadge variant="brand" bordered class="absolute top-1/2 -left-[69px] -translate-y-1/2 max-md:hidden" />
+          <div class="size-full rounded-[24px] bg-offwhite"></div>
+          <SpinBadge
+            variant="brand"
+            bordered
+            class="absolute md:top-1/2 md:-left-[69px] md:-translate-y-1/2 max-md:-top-[60px] max-md:left-1/2 max-md:-translate-x-1/2"
+          />
         </div>
       </div>
     </div>
