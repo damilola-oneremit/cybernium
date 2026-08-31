@@ -34,7 +34,7 @@ export const articles: Article[] = [
     author: 'Cybernium Team',
     date: '20 August 2026',
     readTime: '4 mins read',
-    thumb: '/assets/blog-detail-thumb-d83dfe07.png',
+    thumb: '/assets/blog-detail-thumb-d83dfe07.webp',
     intro:
       '"AI automation" tends to conjure something big and abstract — a system that somehow runs the business. In practice, for a small operations team, it\'s almost always smaller and more specific than that. It\'s one repetitive task, taken off someone\'s plate.',
     sections: [
@@ -103,7 +103,7 @@ export const articles: Article[] = [
     author: 'Cybernium Team',
     date: '12 August 2026',
     readTime: '3 mins read',
-    thumb: '/assets/blog-detail-thumb-d83dfe07.png',
+    thumb: '/assets/blog-detail-thumb-d83dfe07.webp',
     intro:
       "Security incidents at growing businesses rarely involve sophisticated attackers. Far more often the way in is something mundane: a default password that never got changed, a firewall left on factory settings, or an ex-employee's account that nobody remembered to close.",
     sections: [
@@ -156,7 +156,7 @@ export const articles: Article[] = [
     author: 'Cybernium Team',
     date: '4 August 2026',
     readTime: '3 mins read',
-    thumb: '/assets/blog-detail-thumb-d83dfe07.png',
+    thumb: '/assets/blog-detail-thumb-d83dfe07.webp',
     intro:
       'Most office network problems are decided long before the first cable is run — they’re decided when the lease is signed. A space that looks perfect on a walkthrough can be quietly hostile to connectivity.',
     sections: [
