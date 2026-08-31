@@ -216,9 +216,17 @@ const nextSteps = [
   const uploadIcon = document.querySelector<HTMLElement>('[data-upload-icon]');
   const uploadSpinner = document.querySelector<HTMLElement>('[data-upload-spinner]');
 
-  // Picked files accumulate across selections; the merged set backs input.files
-  // so the form always submits everything chosen so far.
-  const picked = new DataTransfer();
+  // Picked files accumulate across selections when the browser supports
+  // constructing a DataTransfer; otherwise each pick simply replaces the last
+  // (the picker and the file-name stack still work either way).
+  let picked: DataTransfer | null = null;
+  try {
+    picked = new DataTransfer();
+  } catch {
+    picked = null;
+  }
+
+  let currentNames: string[] = [];
 
   function setUploading(uploading: boolean, count = 0) {
     uploadSpinner?.classList.toggle('hidden', !uploading);
@@ -226,43 +234,59 @@ const nextSteps = [
     if (uploadLabel) {
       uploadLabel.textContent = uploading
         ? `Uploading ${count} file${count === 1 ? '' : 's'}...`
-        : picked.files.length
+        : currentNames.length
           ? 'Select more file(s)'
           : 'Select file(s)';
     }
   }
 
   function renderFileStack() {
-    const names = Array.from(picked.files).map((f) => f.name);
     if (fileList) {
-      fileList.textContent = names.join(', ');
-      fileList.classList.toggle('hidden', names.length === 0);
+      fileList.textContent = currentNames.join(', ');
+      fileList.classList.toggle('hidden', currentNames.length === 0);
     }
-    fileNote?.classList.toggle('hidden', names.length > 0);
+    fileNote?.classList.toggle('hidden', currentNames.length > 0);
   }
 
   function resetUploadField() {
     if (fileInput) fileInput.value = '';
-    while (picked.items.length) picked.items.remove(0);
+    if (picked) while (picked.items.length) picked.items.remove(0);
+    currentNames = [];
     setUploading(false);
     renderFileStack();
   }
 
   fileInput?.addEventListener('change', () => {
-    const incoming = Array.from(fileInput.files ?? []);
-    if (!incoming.length) return;
-    for (const f of incoming) {
-      const dup = Array.from(picked.files).some((p) => p.name === f.name && p.size === f.size);
-      if (!dup) picked.items.add(f);
-    }
-    // Static site — no upload endpoint. Briefly show the design's uploading
-    // state, then settle into the uploaded file-name stack.
-    setUploading(true, incoming.length);
-    window.setTimeout(() => {
-      fileInput.files = picked.files;
+    try {
+      const incoming = Array.from(fileInput.files ?? []);
+      if (!incoming.length) return;
+      if (picked) {
+        for (const f of incoming) {
+          const dup = Array.from(picked.files).some((p) => p.name === f.name && p.size === f.size);
+          if (!dup) picked.items.add(f);
+        }
+        currentNames = Array.from(picked.files).map((f) => f.name);
+      } else {
+        currentNames = incoming.map((f) => f.name);
+      }
+      // Static site — no upload endpoint. Briefly show the design's uploading
+      // state, then settle into the uploaded file-name stack.
+      setUploading(true, incoming.length);
+      window.setTimeout(() => {
+        try {
+          if (picked) fileInput.files = picked.files;
+        } catch {
+          /* keep the browser's own selection */
+        }
+        setUploading(false);
+        renderFileStack();
+      }, 600 + incoming.length * 250);
+    } catch {
+      // Never leave the field wedged: show whatever the input holds.
+      currentNames = Array.from(fileInput.files ?? []).map((f) => f.name);
       setUploading(false);
       renderFileStack();
-    }, 600 + incoming.length * 250);
+    }
   });
 
   document.querySelectorAll('[data-toast-close]').forEach((btn) =>
