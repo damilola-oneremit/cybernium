@@ -125,6 +125,10 @@ const nextSteps = [
         </div>
 
         <button type="submit" class="btn-primary self-start">Request a quote</button>
+        <p id="send-error" hidden class="body-df text-[#b3261e]">
+          We couldn't send your request right now. Please try again, or email us directly at
+          <a href="mailto:support@cybernium.co" class="underline">support@cybernium.co</a>.
+        </p>
       </form>
 
       <div class="flex w-full max-w-[957px] flex-col gap-6" data-reveal-stagger>
@@ -315,10 +319,34 @@ const nextSteps = [
   };
 
   let overrideDuplicate = false;
+  let sending = false;
+  const submitButton = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+  const sendError = document.getElementById('send-error');
 
-  form?.addEventListener('submit', (e) => {
+  // Deliver the request to the site's support inbox via FormSubmit's AJAX
+  // endpoint (static site — no backend of its own). Attachments ride along
+  // as multipart form data.
+  async function deliver(): Promise<boolean> {
+    if (!form) return false;
+    const data = new FormData(form);
+    data.append('_subject', `New quote request — ${data.get('company') || data.get('name') || 'Cybernium website'}`);
+    data.append('_template', 'table');
+    data.append('_captcha', 'false');
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/support@cybernium.co', {
+        method: 'POST',
+        body: data,
+        headers: { Accept: 'application/json' },
+      });
+      return res.ok;
+    } catch {
+      return false;
+    }
+  }
+
+  form?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    if (!form.reportValidity()) return;
+    if (sending || !form.reportValidity()) return;
 
     const email = (new FormData(form).get('email') as string | null)?.trim().toLowerCase() ?? '';
     const alreadySent = sentEmails().includes(email);
@@ -326,6 +354,26 @@ const nextSteps = [
     if (alreadySent && !overrideDuplicate) {
       toastSuccess?.setAttribute('hidden', '');
       showToast(toastInfo);
+      return;
+    }
+
+    sending = true;
+    sendError?.setAttribute('hidden', '');
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = 'Sending...';
+    }
+
+    const delivered = await deliver();
+
+    sending = false;
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.textContent = 'Request a quote';
+    }
+
+    if (!delivered) {
+      sendError?.removeAttribute('hidden');
       return;
     }
 
